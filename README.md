@@ -12,6 +12,9 @@ This repository is to supply code examples and help bug report the XIVDB Tooltip
 - The ability to link to a hosted javascript file OR insert javascript into the body section of a web page
 - JQuery 1.8 or higher or non (if non, our tooltip will embed it.)
 
+**Guides**
+- [Generating Good XIVDB Links](https://github.com/viion/XIVDB-Tooltips/blob/master/GeneratingLinks.md)
+
 
 Getting Started
 --------

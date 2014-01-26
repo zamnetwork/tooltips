@@ -14,6 +14,8 @@ This repository is to supply code examples and help bug report the XIVDB Tooltip
 
 **Guides**
 - [Generating Good XIVDB Links](https://github.com/viion/XIVDB-Tooltips/blob/master/GeneratingLinks.md)
+- [Generating Links from Lodestone Data](https://github.com/viion/XIVDB-Tooltips/blob/master/GeneratingLinksFromLodestone.md)
+
 
 
 Getting Started

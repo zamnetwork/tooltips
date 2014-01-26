@@ -9,11 +9,16 @@ This repository is to supply code examples and help bug report the XIVDB Tooltip
 - Dev: http://xivtooltips.com/tooltips.js?v=1.6
 
 **Requirements**
-- The ability to link to a hosted javascript file OR insert javascript into the <body> section of a web page
+- The ability to link to a hosted javascript file OR insert javascript into the body section of a web page
 - JQuery 1.8 or higher or non (if non, our tooltip will embed it.)
 
+
+Getting Started
+--------
+
 **Adding the tooltips to your website**
-The script has to be included into the <body> section for it to be able to grab link information
+
+The script has to be included into the body section for it to be able to grab link information
 
 ```HTML
 <html>
@@ -28,6 +33,7 @@ The script has to be included into the <body> section for it to be able to grab 
 ```
 
 **Global Options*
+
 You can supply an xivdb_tooltips object with settings that define the initial global setup of how the tooltips should function.
 
 ```JS
@@ -54,7 +60,9 @@ var xivdb_tooltips =
 ```
 
 **Per Link options**
-If you dynamically generate links in some way, and you want links to appear differently based on the type, for example on XIVPads I want global settings to be the normal tooltip for comments/chat but on pages where I show gearsets and achievements I only care about the tooltip, you can assign "data" attributes on links to specific how they should look
+
+If you dynamically generate links in some way, and you want links to appear differently based on the type, for example on XIVPads I want global settings to be the normal tooltip for comments/chat but on pages where I show gearsets and achievements I only care about the tooltip, you can assign "data" attributes on links to specific how they should look.
+
 - data-replacename
 - data-colorname
 - data-showicon
@@ -64,6 +72,7 @@ If you dynamically generate links in some way, and you want links to appear diff
 ```
 
 You can also adjust the style of tooltips if you want to tweak the look and feel of the actual tooltip itself. This can be done by simply just modifying the tooltips CSS class tags, here are some examples (I will add them all later on)
+
 ```CSS
 // Removing the box shadow from the tooltip frame
 .xivdb-tooltip-frame { box-shadow: none; }

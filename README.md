@@ -55,7 +55,7 @@ var xivdb_tooltips =
 	// If you want an small icon to appear next to the link. (If you have lots and lots of tooltips
 	// being automatically generated, I don't really recommend this as it can increase page load itmes.)
 	'showIcon' : true,
-}
+};
 </script>
 ```
 
@@ -78,6 +78,7 @@ You can also adjust the style of tooltips if you want to tweak the look and feel
 ```CSS
 // Removing the box shadow from the tooltip frame
 .xivdb-tooltip-frame { box-shadow: none; }
+
 // Force the color white on the title of the tooltip
 .xivdb-tooltip-content-header-data-title { color: #fff !important; }
 ```

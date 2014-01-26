@@ -60,7 +60,7 @@ If you dynamically generate links in some way, and you want links to appear diff
 - data-showicon
 
 ```HTML
-<a href="http://xivdb.com/?item/123/hello-world" data-replacename="0" data-colorname="0" data-showicon="0" >hello world</a>
+<a href="[link]" data-replacename="0" data-colorname="0" data-showicon="0" >hello world</a>
 ```
 
 You can also adjust the style of tooltips if you want to tweak the look and feel of the actual tooltip itself. This can be done by simply just modifying the tooltips CSS class tags, here are some examples (I will add them all later on)

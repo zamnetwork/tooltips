@@ -31,7 +31,7 @@ function xivdb_link($Page, $Arguments = NULL)
 ```php
 // Data about the link
 $id = 1234;
-$name = 'Hello World;
+$name = 'Hello World';
 $type = 'item';
 
 // Print the link

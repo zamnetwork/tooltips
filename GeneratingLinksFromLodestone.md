@@ -13,7 +13,7 @@ Obtain the list of IDs
 
 ```php
 // Obtain the array: [MD] => ID
-$itemids = json_deocde(file_get_contents("items.json"), true);
+$itemids = json_decode(file_get_contents("items.json"), true);
 
 // Format the item name from Lodestone into MD5
 $mdname = md5(strtolower($item_name));

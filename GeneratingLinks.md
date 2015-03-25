@@ -7,7 +7,7 @@ You can use the a hashed API json to get a list of ID's related to a hashed name
 
 ```php
 // get dump of hashed ID's
-$xivdb = json_decode(file_get_contents('http://45.56.73.127/api/?type=item&name=all'), true);
+$xivdb = json_decode(file_get_contents('http://xivdb.com/api/?type=item&name=all'), true);
 
 // function to get real id from item name
 function getItemId($string)
@@ -34,7 +34,7 @@ Alternatively, you could try something like this which fetches a lot of informat
 function getItemId($string)
 {
         $string = urlencode($string);
-        $data = file_get_contents('http://45.56.73.127/api/?type=item&name='. $string);
+        $data = file_get_contents('http://xivdb.com/api/?type=item&name='. $string);
         return json_decode($data, true);
 }
 

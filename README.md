@@ -46,7 +46,7 @@ You can supply an xivdb_tooltips object with settings that define the initial gl
 // Optional - Change settings (these are defaults)
 var xivdb_tooltips =
 {
-	// The language of the tooltip, please use (in quotes) capitalized abreviations. 
+	// The language of the tooltip, please use (in quotes) capitalized abbreviations. 
 	// Options: 'EN' 'FR' 'DE' and 'JP'
 	'language' : 'EN',
 	

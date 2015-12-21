@@ -2,6 +2,7 @@ var xivdb_tooltips_default = {
     language: 'en',
     jqueryCheck: true,
     jqueryCheckDuration: 500,
+    fontAwsomeEmbed: true,
 
     setUrlName: true,
     setUrlColor: true,
@@ -16,6 +17,9 @@ var xivdb_tooltips_default = {
 
     targetBlank: true,
     includeHiddenLinks: true,
+    includeCredits: true,
+
+    container: window,
 }
 
 //
@@ -25,8 +29,9 @@ class XIVDBTooltipsClass
 {
     constructor(options) {
         this.version = '0.5';
-        this.xivdb = 'http://xivdb.com';
+        this.xivdb = 'http://xivdb.dev';
         this.jquery = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js';
+        this.fa = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css';
         this.options = options;
         this.ids = {};
         this.urls = {};
@@ -47,14 +52,27 @@ class XIVDBTooltipsClass
                 return;
             }
         } else if (typeof $ === 'undefined') {
-            console.error('The variable $ cannot be found, this script assumes jQuery is embeded, remove the option: ignoreJqueryCheck');
+            console.error('The variable $ cannot be found, this script assumes jQuery is embeded, enable the option: jqueryCheck or embed jquery into your site');
             return;
+        }
+
+        // if window location is on xivdb, then remove credit
+        if (window.location.href.indexOf(this.xivdb) > -1) {
+            this.options.includeCredits = false;
         }
 
         this.setDefaults();
         this.getLinksData();
         this.getTooltipsIdList();
         this.recurrsiveTooltipsHandler(this.ids);
+    }
+
+    //
+    // Change an option
+    //
+    setOption(option, value)
+    {
+        this.options[option] = value;
     }
 
     //
@@ -247,25 +265,32 @@ class XIVDBTooltipsClass
                 content = tooltip[4],
                 key = `xivdbtt_${type}_${id}`;
 
+            // if removing copyright
+            if (this.options.includeCredits) {
+                var $html = $('<div></div>').html(html);
+                    $html.find('.xivdbtt-frame-contents').append('<div class="xivdbtt-copyright">xivdb.com</div>');
+                    html = $html.html();
+            }
+
             var $element = $(`.${key}`);
             $element.attr('data-xivdb-tt', html);
 
             // if setting name or not
-            if (this.options.setUrlName) {
+            if (this.options.setUrlName && content) {
                 $element.text(content.name);
             }
 
             // if coloring
-            if (this.options.setUrlColor) {
+            if (this.options.setUrlColor && content) {
                 if (this.options.setUrlColorDarken) {
-                    $element.addClass(`xivdbtt-rarity-${content.color}-darken`);
+                    $element.addClass(`rarity-${content.color}-darken`);
                 } else {
-                    $element.addClass(`xivdbtt-rarity-${content.color}`);
+                    $element.addClass(`rarity-${content.color}`);
                 }
             }
 
             // if icon
-            if (this.options.setUrlIcon) {
+            if (this.options.setUrlIcon && content) {
                 var css = 'xivdbtt-inline-icon';
                 if (this.options.iconCircle) {
                     css = `${css} xivdbtt-inline-icon-round`;
@@ -283,7 +308,15 @@ class XIVDBTooltipsClass
     {
         var _this = this;
 
+        // js
         $('head').append(`<link href="${this.xivdb}/tooltips.css?v=${this.version}" rel="stylesheet" type="text/css">`);
+
+        // font awsome
+        if (this.options.fontAwsomeEmbed) {
+            $('head').append(`<link href="${this.fa}?v=${this.version}" rel="stylesheet" type="text/css">`);
+        }
+
+        // html
         $('body').append('<div class="xivdbtt"></div>').on('mouseenter', '*[data-xivdb-tt]', function(event) {
             $('.xivdbtt').html($(this).attr('data-xivdb-tt'));
             _this.show(event);
@@ -314,6 +347,9 @@ class XIVDBTooltipsClass
         }).on('mouseleave', '*[data-xivdb-tt]', function() {
             _this.hide();
         });
+
+        // set 100%
+        $('body').css({ 'height' : '100%' });
     }
 
     //
@@ -332,14 +368,18 @@ class XIVDBTooltipsClass
     {
         if (!this.options.tooltipFixed) {
             // Get x/y position and page positions
-            var left = event.pageX + 12;
-            var top = event.pageY + 12;
-            var width = $('.xivdbtt').outerWidth(true);
-            var height = $('.xivdbtt').outerHeight(true);
+            var left = event.pageX + 12,
+                top = event.pageY + 12,
+                width = $('.xivdbtt').outerWidth(true),
+                height = $('.xivdbtt').outerHeight(true),
+                topOffset = top + height,
+                leftOffset = left + width,
+                topLimit = $(this.options.container).height() + $(this.options.container).scrollTop(),
+                leftLimit = $(this.options.container).scrollLeft() + $(this.options.container).width();
 
             // Positions based on window boundaries
-            if (left + width > $(window).scrollLeft() + $(window).width()) left = event.pageX - width;
-            if ($(window).height() + $(window).scrollTop() < top + height) top = event.pageY - height;
+            if (leftOffset > leftLimit) left = event.pageX - width;
+            if (topLimit < topOffset) top = event.pageY - height;
 
             this.position(left, top);
         }

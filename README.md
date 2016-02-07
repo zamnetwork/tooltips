@@ -7,6 +7,14 @@ XIVDB tooltips are still very fresh and in development. There may be issues on y
 - All content types: http://xivdb.com/dev/tooltips/embed/example
 - Set to German: http://xivdb.com/dev/tooltips/embed/language
 - Full screen test: http://xivdb.com/dev/tooltips/embed/fullscreen
+- Codepen example: http://codepen.io/viion/full/mVzYRQ/
+
+
+## Issues:
+
+- Old XIVDB links may not convert properly.
+- Icons don't show properly for: Leves, Placenames, Shops, NPCs, Enemy, titles and some quests
+
 
 ## Embeds
 - You can find the XIVDB tooltips code at: `http://xivdb.com/tooltips.min.js`

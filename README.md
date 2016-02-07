@@ -122,7 +122,7 @@ var xivdb_tooltips =
 
 ### Data Attributes
 
-XIVDB injects int othe attribute: `data-xivdb-tooltip`, so don't use this! It will also attach an `data-xivdb-key` to identify links specifically.
+XIVDB injects into the attribute: `data-xivdb-tooltip`, and will also attach an `data-xivdb-key` attribute to identify links specifically. So don't manually use this, for some reason :O they will be overwritten.
 
 Sometimes, you want specific links to act differently than the global setting, here are some data attributes you can use in your `a` tags.
 

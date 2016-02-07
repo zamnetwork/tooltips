@@ -2,6 +2,12 @@
 
 XIVDB tooltips are still very fresh and in development. There may be issues on your site, I am working with developers to get all kinks sorted out :) I hugely recommend using the tooltip code hosted at XIVDB rather than downloading it as it will help keeping the code up to date a lot easier, for everyone!
 
+## Examples:
+
+- All content types: http://xivdb.com/dev/tooltips/embed/example
+- Set to German: http://xivdb.com/dev/tooltips/embed/language
+- Full screen test: http://xivdb.com/dev/tooltips/embed/fullscreen
+
 ## Embeds
 - You can find the XIVDB tooltips code at: `http://xivdb.com/tooltips.min.js`
 - If you have any issues, please use the non minified one to debug: `http://xivdb.com/tooltips.js`

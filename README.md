@@ -4,9 +4,6 @@ XIVDB tooltips are still very fresh and in development. There may be issues on y
 
 ## Examples:
 
-- All content types: http://xivdb.com/dev/tooltips/embed/example
-- Set to German: http://xivdb.com/dev/tooltips/embed/language
-- Full screen test: http://xivdb.com/dev/tooltips/embed/fullscreen
 - Codepen example: http://codepen.io/viion/full/mVzYRQ/
 
 

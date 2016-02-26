@@ -30,6 +30,13 @@ $rarity-relic: #BA68C8;
 $rarity-aetherial: #F06292;
 
 //
+// Don't underline links
+//
+a[data-xivdb-tooltip] {
+    text-decoration: none !important;
+}
+
+//
 // clear float
 //
 .xivdb-cf {
@@ -106,6 +113,11 @@ $rarity-aetherial: #F06292;
     line-height: 18px;
 }
 
+table.xivdb-frame {
+    width: auto !important;
+    text-align: left;
+}
+
 .xivdb-frame {
     font-family: Arial;
     color: #fff;
@@ -127,6 +139,7 @@ $rarity-aetherial: #F06292;
         border: none;
         padding: none;
         margin: none;
+        text-align: left;
     }
 
     .fa-angle-right {
@@ -356,8 +369,8 @@ $rarity-aetherial: #F06292;
 }
 
 .xivdb-ii {
-    display: inline-block;
-    vertical-align: bottom;
+    display: inline-block !important;
+    vertical-align: middle;
     margin: 0 5px 0 0;
     border-radius: 2px !important;
     width: 20px !important;

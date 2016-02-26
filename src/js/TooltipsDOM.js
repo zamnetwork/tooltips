@@ -38,7 +38,8 @@ class XIVDBTooltipsDOMClass
             $element.unbind('mousemove').mousemove((event) => {
                 this.follow(event);
             });
-        }).on('mouseleave', '*[data-xivdb-tooltip]', (event) => {
+        })
+        .on('mouseleave', '*[data-xivdb-tooltip]', (event) => {
             var $element = $(event.target);
 
             // unbind mouse move event

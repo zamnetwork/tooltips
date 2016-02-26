@@ -5,7 +5,7 @@ XIVDB tooltips are still very fresh and in development. There may be issues on y
 ## Examples:
 
 - Codepen example: http://codepen.io/viion/full/mVzYRQ/
-
+- French example: http://codepen.io/viion/full/VaZNbp/
 
 ## Issues:
 

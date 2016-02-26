@@ -88,8 +88,8 @@ class XIVDBTooltipsDOMClass
             height = $('.xivdb').outerHeight(true),
             topOffset = top + height,
             leftOffset = left + width,
-            topLimit = $(container).height() + $(container).scrollTop(),
-            leftLimit = $(container).scrollLeft() + $(container).width();
+            topLimit = $(window).height() + $(window).scrollTop(),
+            leftLimit = $(window).scrollLeft() + $(window).width();
 
         // Positions based on window boundaries
         if (leftOffset > leftLimit) left = event.pageX - width;

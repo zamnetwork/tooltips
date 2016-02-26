@@ -207,7 +207,7 @@ class XIVDBTooltipsDOMClass
 
             // IF the attribute is not undefined
             // AND the attribute is false
-            if ($link.attr(attr) && ($link.attr(attr) == '0' || $link.attr(attr).toLowerCase() == 'false')) {
+            if (typeof $link.attr(attr) !== 'undefined' && ($link.attr(attr) == '0' || $link.attr(attr).toLowerCase() == 'false')) {
                 return false;
             }
         }

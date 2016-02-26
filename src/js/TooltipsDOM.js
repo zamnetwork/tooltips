@@ -23,6 +23,11 @@ class XIVDBTooltipsDOMClass
             var $element = $(event.currentTarget),
                 html = $element.attr('data-xivdb-tooltip');
 
+            // if element is being dragged, don't show any tooltips
+            if ($('.ui-draggable-dragging').length > 0) {
+                return;
+            }
+
             // set the html into the xivdb placeholder
             $('.xivdb').html(html);
 

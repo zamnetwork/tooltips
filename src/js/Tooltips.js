@@ -7,16 +7,8 @@ class XIVDBTooltipsClass
     {
         this.version = '0.7';
 
-        // Options passed
-        this.options = options;
-
         // has the tooltips initialized?
         this.hasInitialized = false;
-
-        // if window location is on xivdb, then remove credit
-        if (window.location.href.indexOf(this.xivdb) > -1) {
-            this.options.includeCredits = false;
-        }
     }
 
     //
@@ -62,6 +54,20 @@ class XIVDBTooltipsClass
     getVersion()
     {
         return this.version;
+    }
+
+    //
+    // Set the options
+    //
+    setOptions(options)
+    {
+        // Options passed
+        this.options = options;
+
+        // if window location is on xivdb, then remove credit
+        if (window.location.href.indexOf(this.xivdb) > -1) {
+            this.options.includeCredits = false;
+        }
     }
 
     //

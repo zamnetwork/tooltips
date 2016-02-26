@@ -43,7 +43,7 @@ var xivdb_tooltips_valid_types = [
 ];
 
 // initialize classes
-var XIVDBTooltips = new XIVDBTooltipsClass(typeof xivdb_tooltips !== 'undefined' ? xivdb_tooltips : xivdb_tooltips_default),
+var XIVDBTooltips = new XIVDBTooltipsClass(),
     XIVDBTooltipsDevice = new XIVDBTooltipsDeviceClass(),
     XIVDBTooltipsUrls = new XIVDBTooltipsUrlsClass(),
     XIVDBTooltipsQuery = new XIVDBTooltipsQueryClass(),
@@ -52,5 +52,6 @@ var XIVDBTooltips = new XIVDBTooltipsClass(typeof xivdb_tooltips !== 'undefined'
 
 // start XIVDB Tooltips
 document.addEventListener("DOMContentLoaded", function(event) {
+    XIVDBTooltips.setOptions(typeof xivdb_tooltips !== 'undefined' ? xivdb_tooltips : xivdb_tooltips_default);
     XIVDBTooltips.initialize();
 });

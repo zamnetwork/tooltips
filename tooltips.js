@@ -589,7 +589,7 @@ var XIVDBTooltipsUrlsClass = (function () {
                 
                 // remove url
                 var baseurl = XIVDBTooltips.getOption("xivdb").replace("http://","").replace("https://","");
-                href = href.replace(baselink, '');
+                href = href.replace(baseurl, '');
 
                 // split up the link and clean it
                 href = href.split('/').filter(function (n) {

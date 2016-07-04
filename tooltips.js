@@ -585,9 +585,11 @@ var XIVDBTooltipsUrlsClass = (function () {
                 if (href[0] != '/' && href.indexOf(XIVDBTooltips.getOption('xivdb')) == -1) {
                     return;
                 }
-
+                
+                
                 // remove url
-                href = href.replace('xivdb.com', '');
+                var baseurl = XIVDBTooltips.getOption("xivdb").replace("http://","").replace("https://","");
+                href = href.replace(baselink, '');
 
                 // split up the link and clean it
                 href = href.split('/').filter(function (n) {

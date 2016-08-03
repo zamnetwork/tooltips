@@ -587,6 +587,7 @@ var XIVDBTooltipsUrlsClass = (function () {
                 }
 
                 // remove url
+                href = href.replace('fr.','').replace('de.','').replace('ja.','');
                 href = href.replace('xivdb.com', '');
 
                 // split up the link and clean it

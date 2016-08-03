@@ -9,6 +9,14 @@ class XIVDBTooltipsClass
 
         // has the tooltips initialized?
         this.hasInitialized = false;
+
+        // timer for delayed get
+        this.tooltipsTimer = false;
+        this.tooltipsDelay = 1000;
+
+        // tooltips get queue
+        this.queue = null;
+        this.queueDelay = 1000;
     }
 
     //
@@ -105,24 +113,38 @@ class XIVDBTooltipsClass
             return;
         }
 
-        // Begin
-        XIVDBTooltipsUrls.parse();
+        clearTimeout(this.queue);
+        this.queue = setTimeout(() => {
+            // Begin
+            XIVDBTooltipsUrls.parse();
 
-        // get links, and verify its length
-        if (links = XIVDBTooltipsUrls.getLinks())
-        {
-            // get tooltips for the links
-            XIVDBTooltipsQuery.get(links, (tooltips) =>
+            // get links, and verify its length
+            if (links = XIVDBTooltipsUrls.getLinks())
             {
-                // inject tooltips into dom
-                XIVDBTooltipsDOM.inject(tooltips);
+                // get tooltips for the links
+                XIVDBTooltipsQuery.get(links, (tooltips) =>
+                {
+                    // inject tooltips into dom
+                    XIVDBTooltipsDOM.inject(tooltips);
 
-                // tooltip completed event
-                if (CompletedEvent = XIVDBTooltips.getOption('event_tooltipsLoaded')) {
-                    CompletedEvent();
-                }
-            });
-        }
+                    // tooltip completed event
+                    if (CompletedEvent = XIVDBTooltips.getOption('event_tooltipsLoaded')) {
+                        CompletedEvent();
+                    }
+                });
+            }
+        }, this.queueDelay);
+    }
+
+    //
+    // Get delayed
+    //
+    getDelayed()
+    {
+        clearTimeout(this.tooltipsTimer);
+        this.tooltipsTimer = setTimeout(() => {
+            XIVDBTooltips.get();
+        }, this.tooltipsDelay);
     }
 
     //

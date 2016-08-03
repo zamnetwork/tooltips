@@ -16,8 +16,15 @@ class XIVDBTooltipsQueryClass
         // organize all links
         links.each((i, element) =>
         {
-            var key = $(element).attr('data-xivdb-key').split('_'),
-                type = key[1].toString(), id = parseInt(key[2]);
+            var original = $(element).attr('data-xivdb-key'),
+                key = original.split('_'),
+                type = key[1].toString(),
+                id = parseInt(key[2]);
+
+            // if key already processed, don't query it
+            if (XIVDBTooltipsHolder.exists(original)){
+                return;
+            }
 
             // if empty for whatever reason..
             if (type.length == 0 || !id) {
@@ -39,7 +46,9 @@ class XIVDBTooltipsQueryClass
         }
 
         // query tooltips
-        this.query(list, callback);
+        if (Object.keys(list).length > 0) {
+            this.query(list, callback);
+        }
     }
 
     //
@@ -57,7 +66,7 @@ class XIVDBTooltipsQueryClass
             url: `${XIVDBTooltips.getOption('xivdb')}/tooltip`,
             method: 'POST',
             dataType: 'json',
-            cache: true,
+            cache: false,
             data: {
                 list: list,
                 language: XIVDBTooltips.getOption('language'),

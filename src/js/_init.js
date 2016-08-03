@@ -9,7 +9,7 @@ var xivdb_tooltips_default = {
     seturlcolorDarken: true,
     seturlicon : true,
 
-    iconSize: 20,
+    iconSize: 18,
     iconCircle: true,
 
     tooltipFixed: false,
@@ -48,7 +48,8 @@ var XIVDBTooltips = new XIVDBTooltipsClass(),
     XIVDBTooltipsUrls = new XIVDBTooltipsUrlsClass(),
     XIVDBTooltipsQuery = new XIVDBTooltipsQueryClass(),
     XIVDBTooltipsDependency = new XIVDBTooltipsDependencyClass(),
-    XIVDBTooltipsDOM = new XIVDBTooltipsDOMClass();
+    XIVDBTooltipsDOM = new XIVDBTooltipsDOMClass(),
+    XIVDBTooltipsHolder = new XIVDBTooltipsHolderClass();
 
 // start XIVDB Tooltips
 document.addEventListener("DOMContentLoaded", function(event) {

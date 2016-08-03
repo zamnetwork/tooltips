@@ -2,37 +2,37 @@
 // Google Colors
 // based on: http://www.google.co.uk/design/spec/style/color.html#color-color-palette
 // ----------------------------------------------------------------------
-$red: #EF5350;
-$blue: #64B5F6;
-$green: #9CCC65;
-$yellow: #FFEE58;
-$orange: #FB8C00;
-$purple: #CE93D8;
+$red: #fc3f3b;
+$blue: #34a5ff;
+$green: #94ed22;
+$yellow: #f7e649;
+$orange: #f9900c;
+$purple: #ed97fb;
 $white: #fff;
-$gray: #555;
+$gray: #aaa;
 $black: #000;
-$danger: #D32F2F;
-$pink: #F06292;
-$highlight: #DCC9A5;
-$highlighter: #FFDE74;
-$lime: #AED581;
+$danger: #e21a1a;
+$pink: #ff4e8a;
+$highlight: #f9dead;
+$highlighter: #ffdb67;
+$lime: #b8f472;
 
 // icon sizes
 $iconSize: 92px;
 
-// ----------------------------------------------------------------------
+//
 // Game rarity colors
-// ----------------------------------------------------------------------
-//$rarity-common: #fff;
-$rarity-scares: #AED581;
-$rarity-rare: #64B5F6;
-$rarity-relic: #BA68C8;
-$rarity-aetherial: #F06292;
+//
+$rarity-common: #fff;
+$rarity-scares: #C4F58B;
+$rarity-rare: #78D4FF;
+$rarity-relic: #E55FFC;
+$rarity-aetherial: #FE82AC;
 
 //
 // Don't underline links
 //
-a[data-xivdb-key] {
+*[data-xivdb-key] {
     text-decoration: none !important;
 }
 
@@ -126,6 +126,10 @@ table.xivdb-frame {
     border: none;
     font-size: 12px;
     line-height: 18px;
+
+    &:not(.xivdb-frame-recipe) {
+        max-width: 370px;
+    }
 
     hr {
         height: 1px;
@@ -276,8 +280,8 @@ table.xivdb-frame {
 }
 
 .xivdb-cc {
-    max-width: 400px;
-    margin-bottom: 10px;
+    max-width: 370px;
+    margin: 0 -12px 10px -12px;
 }
 
 .xivdb-cc-block {
@@ -285,14 +289,17 @@ table.xivdb-frame {
     text-align: right;
     border-radius: 3px;
     border-bottom: solid 6px #333;
-    margin: 0 5px 0 0;
-    height: 34px;
-    padding: 0 5px 0 0;
+    margin: 0 10px 0 0;
+    height: 40px;
+    padding:0;
+    width:100px;
 }
 .xivdb-cc-bt {
     color: $highlighter;
-    font-size: 11px;
+    font-size: 10px;
     margin: 0 0 5px 0;
+    text-transform: uppercase;
+    font-family: Tahoma;
 }
 .xivdb-cc-bn {
     color: #5EA0F2;
@@ -370,18 +377,17 @@ table.xivdb-frame {
 
 .xivdb-ii {
     display: inline-block !important;
-    vertical-align: middle;
-    margin: 0 5px 0 0;
+    margin: 0px 3px 0 3px;
     border-radius: 2px !important;
-    width: 20px !important;
-    height: 20px !important;
+    width: 16px !important;
+    height: 16px !important;
     box-shadow: none !important;
     background-color: transparent !important;
     border: none !important;
     padding: 0 !important;
 
     &.xivdb-iir {
-        border-radius: 50% !important;
+        border-radius: 3px !important;
     }
 }
 

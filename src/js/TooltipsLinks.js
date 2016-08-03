@@ -21,23 +21,29 @@ class XIVDBTooltipsUrlsClass
         // reset links (existing ones will have already been processed)
         this.links = {};
 
-        // go through all links and find XIVDB links
-        $(`${XIVDBTooltips.getOption('linkContainer')} a`).each((i, element) => {
-            var $link = $(element),
-                href = $link.attr('href');
+        // tooltip container
+        var container = XIVDBTooltips.getOption('linkContainer');
 
-            // check if the link is ignored
-            if ($link.attr('data-xivdb-ignore')) {
-                return;
+        // go through all links and find XIVDB links
+        $(`${container} a, ${container} *[data-tooltip-id]`).each((i, element) => {
+            var $link = $(element),
+                href = $link.attr('href'),
+                dataId = $link.attr('data-tooltip-id');
+
+            if (!dataId) {
+                // check if the link is ignored
+                if ($link.attr('data-xivdb-ignore')) {
+                    return;
+                }
+
+                // is the link empty?
+                if (typeof href === 'undefined' || href.length < 1) {
+                    return;
+                }
             }
 
             // ignore if already processed before
-            if ($link.attr('data-xivdb-key')) {
-                return;
-            }
-
-            // is the link empty?
-            if (typeof href === 'undefined' || href.length < 1) {
+            if ($link.attr('data-xivdb-tooltip')) {
                 return;
             }
 
@@ -46,49 +52,55 @@ class XIVDBTooltipsUrlsClass
                 return;
             }
 
-            // remove any double slashes
-            href = href
-                .toString()
-                .toLowerCase()
-                .replace('//', '/')
-                .replace('http:', '')
-                .replace('https:', '')
-                .toString();
+            if (!dataId) {
+                // remove any double slashes
+                href = href
+                    .toString()
+                    .toLowerCase()
+                    .replace('//', '/')
+                    .replace('http:', '')
+                    .replace('https:', '')
+                    .toString();
 
-            // is the link not an XIVDB link (and not local)
-            if (href[0] != '/' && href.indexOf(XIVDBTooltips.getOption('xivdb')) == -1) {
-                return;
+                // is the link not an XIVDB link (and not local)
+                if (href[0] != '/' && href.indexOf(XIVDBTooltips.getOption('xivdb')) == -1) {
+                    return;
+                }
+
+                // remove url
+                href = href.replace('xivdb.com', '');
+
+                // split up the link and clean it
+                href = href.split('/').filter(n => n.toString().length > 0);
+
+                // does a valid type exist
+                if (xivdb_tooltips_valid_types.indexOf(href[0]) == -1) {
+                    return;
+                }
+
+                // get type and ID
+                var type = href[0].replace('?', ''),
+                    id = href[1];
+
+                // fix dated links
+                if (href.indexOf('.com/?') > -1) {
+                    href = href.replace('.com/?', '.com/');
+                    $link.attr('href', href.toString());
+                }
+
+                // if url length below two, it isn't valid, as
+                // 2 = TYPE and ID
+                if (typeof href == 'undefined' || href.length < 2) {
+                    return;
+                }
+            } else {
+                var dataId = dataId.split('/'),
+                    type = dataId[0],
+                    id = dataId[1];
             }
-
-            // remove url
-            href = href.replace('xivdb.com', '');
-
-            // split up the link and clean it
-            href = href.split('/').filter(n => n.toString().length > 0);
-
-            // does a valid type exist
-            if (xivdb_tooltips_valid_types.indexOf(href[0]) == -1) {
-                return;
-            }
-
-            // get type and ID
-            var type = href[0].replace('?', ''),
-                id = href[1];
 
             // create a sort of cache key
             var key = `xivdb_${type}_${id}`;
-
-            // if url length below two, it isn't valid, as
-            // 2 = TYPE and ID
-            if (typeof href == 'undefined' || href.length < 2) {
-                return;
-            }
-
-            // fix dated links
-            if (href.indexOf('xivdb.com/?') > -1) {
-                href = href.replace('xivdb.com/?', 'xivdb.com/');
-                $link.attr('href', href.toString());
-            }
 
             // attach the key to the element, (or the parent element)
             // we also check we havent added the key before

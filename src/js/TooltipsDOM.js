@@ -3,6 +3,11 @@
 //
 class XIVDBTooltipsDOMClass
 {
+    constructor()
+    {
+        this.isActive = false;
+    }
+
     //
     // Prepare the dom with some stuff! Such as tooltips etc.
     //
@@ -18,10 +23,12 @@ class XIVDBTooltipsDOMClass
         $('body').append('<div class="xivdb" style="display:none;"></div>');
 
         // on mouse entering a tooltip
-        $('body').on('mouseenter', '[data-xivdb-tooltip]', (event) =>
+        $('body').on('mouseenter', '[data-xivdb-key]', (event) =>
         {
+            this.isActive = true;
             var $element = $(event.currentTarget),
-                html = $element.attr('data-xivdb-tooltip');
+                key = $element.attr('data-xivdb-key'),
+                html = XIVDBTooltipsHolder.get(key);
 
             // if element is being dragged, don't show any tooltips
             if ($('.ui-draggable-dragging').length > 0) {
@@ -33,20 +40,20 @@ class XIVDBTooltipsDOMClass
 
             // show the tooltip
             this.show(event);
-
-            // on mouse move
-            $element.unbind('mousemove').mousemove((event) => {
-                this.follow(event);
-            });
         })
-        .on('mouseleave', '*[data-xivdb-tooltip]', (event) => {
+        .on('mouseleave', '*[data-xivdb-key]', (event) => {
+            this.isActive = false;
             var $element = $(event.target);
-
-            // unbind mouse move event
-            $element.unbind('mousemove');
 
             // hide tooltips
             this.hide();
+        });
+
+        // on mouse move
+        $('body').on('mousemove', (event) => {
+            if (this.isActive) {
+                this.follow(event);
+            }
         });
 
         // set 100%
@@ -82,8 +89,8 @@ class XIVDBTooltipsDOMClass
     {
         // Get x/y position and page positions
         var container = XIVDBTooltips.getOption('linkContainer'),
-            left = event.pageX + 12,
-            top = event.pageY + 12,
+            left = event.pageX + 30,
+            top = event.pageY + 30,
             width = $('.xivdb').outerWidth(true),
             height = $('.xivdb').outerHeight(true),
             topOffset = top + height,
@@ -127,45 +134,20 @@ class XIVDBTooltipsDOMClass
                     html = tooltip.html,
                     key = `xivdb_${type}_${data.id}`,
                     container = XIVDBTooltips.getOption('linkContainer'),
-                    $html = this.getFrame(),
-                    $link = $(`${container} [data-xivdb-key="${key}"]:visible`);
-
-                // if no link, continue
-                if (!$link || $link.length == 0) {
-                    //console.log('no link, either not visible or removed from dom: ' + key);
-                    continue;
-                }
-
-                // if link already has stuff injected, don't do it again
-                if ($link.attr('data-xivdb-key') && $link.attr('data-xivdb-key').length > 0) {
-                    continue;
-                }
-
-                // inject tooltip html into frame
-                $html.find('.xivdb-fc').html(html);
-
-                // if to include xivdb credits
-                if (XIVDBTooltips.getOption('includeCredits')) {
-                    $html.find('.xivdb-fc').append('<div class="xivdb-copyright">xivdb.com</div>');
-                }
-
-                // if to remove shadow from the frame
-                if (!XIVDBTooltips.getOption('includeFrameShadow')) {
-                    $html.find('.xivdb-frame-shadow').removeClass('xivdb-frame-shadow');
-                }
+                    $link = $(`${container} [data-xivdb-key="${key}"]`);
 
                 // inject tooltip
-                $link.attr('data-xivdb-tooltip', $html.html());
+                XIVDBTooltipsHolder.add(key, html);
 
                 // --------------------------------------------------------------
 
                 // if to replace name or not
-                if (this.checkLinkSettings($link, ['seturlname', 'replacename'])) {
+                if (this.checkLinkSettings($link, ['noreplace', 'seturlname', 'replacename'])) {
                     $link.text(data.name);
                 }
 
                 // if to color name or not
-                if (this.checkLinkSettings($link, ['seturlcolor', 'colorname'])) {
+                if (this.checkLinkSettings($link, ['noreplace', 'seturlcolor', 'colorname'])) {
                     var css = XIVDBTooltips.getOption('seturlcolorDarken')
                         ? `rarity-${data.color}-darken`
                         : `rarity-${data.color}`;
@@ -174,7 +156,7 @@ class XIVDBTooltipsDOMClass
                 }
 
                 // if to set icon or not
-                if (this.checkLinkSettings($link, ['seturlicon', 'showicon'])) {
+                if (this.checkLinkSettings($link, ['noreplace', 'seturlicon', 'showicon'])) {
                     var css = 'xivdb-ii',
                         iconsize = XIVDBTooltips.getOption('iconSize');
 
@@ -183,7 +165,7 @@ class XIVDBTooltipsDOMClass
                         css = `${css} xivdb-iir`;
                     }
 
-                    $link.prepend(`<img src="${data.icon}" class="${css}" height="${iconsize}">`);
+                    $link.prepend(`<img src="${data.icon}" class="${css}">`);
                 }
             }
         }
@@ -220,6 +202,6 @@ class XIVDBTooltipsDOMClass
     //
     getFrame()
     {
-        return $('<div></div>').html(`<table class="xivdb-frame xivdb-frame-shadow" width="0" border="0" cellspacing="0" cellpadding="0"><tr><td class="xivdb-fw xivdb-ftl"></td><td class="xivdb-fh xivdb-ft"></td><td class="xivdb-fw xivdb-ftr"></td></tr><tr><td class="xivdb-fw xivdb-fml"></td><td class="xivdb-fc" valign="top"></td><td class="xivdb-fw xivdb-fmr"></td></tr><tr><td class="xivdb-fw xivdb-fbl"></td><td class="xivdb-fh xivdb-fb"></td><td class="xivdb-fw xivdb-fbr"></td></tr></table>`);
+        return $('<div></div>').html(``);
     }
 }

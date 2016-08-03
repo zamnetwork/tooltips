@@ -137,7 +137,7 @@ class XIVDBTooltipsDOMClass
                 }
 
                 // if link already has stuff injected, don't do it again
-                if ($link.attr('data-xivdb-tooltip') && $link.attr('data-xivdb-tooltip').length > 0) {
+                if ($link.attr('data-xivdb-key') && $link.attr('data-xivdb-key').length > 0) {
                     continue;
                 }
 

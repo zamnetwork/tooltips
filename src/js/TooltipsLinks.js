@@ -32,7 +32,7 @@ class XIVDBTooltipsUrlsClass
             }
 
             // ignore if already processed before
-            if ($link.attr('data-xivdb-tooltip')) {
+            if ($link.attr('data-xivdb-key')) {
                 return;
             }
 

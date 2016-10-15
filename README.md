@@ -119,6 +119,44 @@ Sometimes you may want specific links to act differently than the global setting
 - `data-xivdb-seturlcolor="0"` do not change the colour of the link to match rarity
 - `data-xivdb-seturlicon="0"` do not add an game icon next to the link
 
+## Advanced functionality
+
+Here are a few Javascript funky stuff:
+
+```js
+//
+// Need to call a function once the tooltips load?
+//
+var xivdb_tooltips.event_tooltipsLoaded = function() {
+    console.log('Tooltips loaded!');
+};
+```
+
+```js
+//
+// Does your site contain dynamic content that
+// is loaded in later? (eg AJAX), force the
+// tooltips to re-scan for links.
+//
+XIVDBTooltips.get()
+
+//
+// if your dynamically loaded content is heavy
+// (eg: search results, lots of html) then you
+// can call a delayed method, which will wait.
+// A bit smoother.
+//
+XIVDBTooltips.getDelayed();
+```
+
+```js
+//
+// Need to remove the tooltips, eg: Clicking
+// a link that loads in another page?
+//
+XIVDBTooltips.hide();
+```
+
 ## Have any issues?
 
 If you run into any issues, it is really easy to contact me, either:

@@ -1,0 +1,328 @@
+// -------------------------------------------
+// Tooltip link
+// -------------------------------------------
+
+a[data-xivdb-key] {
+	img {
+		vertical-align: top;
+    	margin: 0 5px 0 0;
+		border-radius: 3px;
+	}
+}
+
+// -------------------------------------------
+// Tooltip visual
+// -------------------------------------------
+
+// tooltip floater
+.xivdb {
+    display: none;
+    position: absolute;
+    z-index: 999999999999 !important;
+}
+
+// main tooltip frame (the visual bit)
+.xivdb-ttfr {
+	font-family: Arial;
+    font-size: 12px;
+    line-height: 18px;
+	background-color: #282828;
+	color: #fff;
+
+	width: 330px;
+	border-radius: 5px;
+	overflow: hidden;
+	border: solid 1px #111;
+
+	box-shadow: inset 0 0 3px #444, 0 0 10px 2px #111;
+
+	&.xivdb-ttfr-recipe {
+		width: 530px;
+
+		.xivdb-ch > div:last-of-type > div:first-of-type {
+			width: 430px;
+		}
+	}
+
+	hr {
+		height: 1px;
+		background-color: #000;
+		margin: 5px 0;
+		padding: 0;
+	}
+
+	.xivdb-dom {
+		padding: 0 5px;
+		text-align: right;
+		text-shadow: none;
+		color: #666;
+		font-size: 10px;
+		line-height: 14px;
+		height: 14px;
+		margin-top: 5px;
+	}
+}
+
+// content header
+.xivdb-ch {
+	width: 100%;
+	display: flex;
+	background-color: rgba(0,0,0,0.3);
+	border-bottom: solid 1px #111;
+	height: 61px;
+
+	> div:first-of-type {
+		flex: 0 1 10%;
+
+		> div {
+			display: inline-block;
+			width: 60px; height: 60px;
+			overflow: hidden;
+			position: relative;
+			background-color: #111;
+
+			img {
+				@include center();
+				position: absolute;
+				max-width: 64px;
+				max-height: 64px;
+			}
+		}
+	}
+
+	> div:last-of-type {
+		flex: 0 1 90%;
+		padding: 13px 0 0 15px;
+
+		> div:first-of-type {
+			font-size: 16px;
+			width: 200px;
+			display: block;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		> div:last-of-type {
+			font-size: 10px;
+			text-transform: uppercase;
+			line-height: 20px;
+			height: 20px;
+			color: #aaa;
+			text-shadow: none;
+		}
+	}
+}
+
+// content banners
+.xivdb-cb {
+	width: 328px;
+	height: 100px;
+	background-position: center;
+	background-size: cover;
+	border-bottom: solid 1px #000;
+	border-top: solid 1px #000;
+	background-color: #222;
+	box-shadow: inset 0 0 10px #000;
+}
+
+// item help text
+.xivdb-chi {
+	margin: 0;
+	padding: 8px;
+	background-color: #222;
+	border-bottom: solid 1px #111;
+	font-size: 11px;
+	text-shadow: none;
+}
+
+// item attributes (mainly weapons/armor)
+.xivdb-cc {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 4px;
+
+	.xivdb-cc-block {
+		flex: 0 1 100px;
+		margin: 3px;
+
+	    text-align: right;
+	    border-radius: 3px;
+	    border-bottom: solid 5px #333;
+
+	    height: 40px;
+	}
+
+	// base attribute title
+	.xivdb-cc-bt {
+	    color: $highlight;
+	    font-size: 10px;
+	    margin: 0 0 5px 0;
+	    text-transform: uppercase;
+	    font-family: Tahoma;
+	}
+
+	// base attribute number
+	.xivdb-cc-bn {
+	    color: #5EA0F2;
+	    letter-spacing: -1px;
+	    font-size: 20px;
+	    font-family: Arial;
+	}
+}
+
+// core attributes
+.xivdb-cs {
+	padding: 5px 10px;
+
+	.xivdb-csb-title {
+	    display: inline-block;
+		text-transform: uppercase;
+	    width: 150px;
+	    color: $highlight;
+		font-size: 11px;
+	}
+	.xivdb-csb-number {
+	    display: inline-block;
+	    width: 50px;
+		font-size: 14px;
+	    color: #5EA0F2;
+	}
+	.xivdb-csb-number2 {
+	    display: inline-block;
+	    width: 50px;
+		font-size: 14px;
+	    color: #95b153;
+	}
+	.xivdb-csb-number3 {
+	    display: inline-block;
+	    width: 80px;
+	    background-color: #f00;
+	    color: #EAB63C;
+	}
+
+	.xivdb-ch-set-bonus {
+	    color: #95b153;
+	    margin: 15px 0 2px 0;
+	    font-size: 10px;
+	}
+}
+
+// Other data data
+.xivdb-cdl {
+	padding: 10px 10px 0 10px;
+	display: flex;
+	line-height: 12px;
+    font-size: 12px;
+
+	> div:first-of-type {
+		flex: 0 1 50%;
+		color: $highlight;
+	}
+
+	> div:last-of-type {
+		flex: 0 1 50%;
+	}
+
+	.xivdb-c-label {
+	    font-size: 10px;
+	}
+	.xivdb-c-title {
+	    width: 100px;
+	    color: #948c7b;
+	    font-size: 11px;
+	    display: inline-block;
+	}
+	.xivdb-c-context {
+	    width: 180px;
+	    color: #eee;
+	    font-size: 11px;
+	    display: inline-block;
+	}
+	.xivdb-c-info {
+	    font-size: 11px;
+	    line-height: 18px;
+	    color: #999;
+	    background-color: #222;
+	    max-width: 400px;
+	    padding: 10px;
+	    border-bottom:solid 1px #000;
+	}
+
+	.xivdb-isz em {
+	    display: inline-block;
+	    font-size:10px;
+	    border-radius: 3px;
+	    margin: 5px 10px 0 0;
+	    text-transform: uppercase;
+	    color: #C39BCD;
+	    font-style: normal;
+	}
+}
+
+// levequest client
+.xivdb-lcz {
+	font-size: 11px;
+	padding: 8px;
+	background-color: #333;
+	border-bottom: solid 1px #111;
+}
+
+// recipe specific
+.xivdb-ttfr-recipe .xivdb-right {
+	margin-top: 8px;
+
+	> span {
+		font-size: 10px;
+		color: $highlight;
+		margin-bottom: 5px;
+		display: block;
+	}
+
+	.xivdb-sti {
+		font-size: 13px;
+		line-height: 13px;
+		margin-bottom: 5px;
+
+		img {
+			width: 16px;
+			height: 16px;
+			border-radius: 3px;
+			vertical-align: top;
+			margin: 0;
+		}
+	}
+}
+
+// minion skill
+.xivdb-msk {
+	background-color: #111;
+	padding: 10px;
+	margin-top: 10px;
+	border-top: solid 1px #000;
+    border-bottom: solid 1px #000;
+
+	> div:first-of-type {
+		display: flex;
+
+		> div:first-of-type {
+			flex: 0 1 50%;
+			color: $purple;
+			font-size: 15px;
+		}
+
+		> div:last-of-type {
+			flex: 0 1 50%;
+			color: $lime;
+		}
+	}
+
+	> div:last-of-type {
+		margin-top: 5px;
+		font-size: 12px;
+	}
+}

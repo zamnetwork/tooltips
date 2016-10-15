@@ -1,158 +1,127 @@
+![XIVDB Tooltips](http://i.imgur.com/UxS5nVf.png)
+
 # XIVDB Tooltips
 
-XIVDB tooltips are still very fresh and in development. There may be issues on your site, I am working with developers to get all kinks sorted out :) I hugely recommend using the tooltip code hosted at XIVDB rather than downloading it as it will help keeping the code up to date a lot easier, for everyone!
+The XIVDB tooltips script *(3.2kb JS / 1.8kb CSS)* allows you to load Final Fantasy XIV game content on your site, all data is obtained from XIVDB, hosted on a US Server.
 
 ## Examples:
 
-- Codepen example: http://codepen.io/viion/full/mVzYRQ/
-- French example: http://codepen.io/viion/full/VaZNbp/
+- XIVDB: http://xivdb.com/dev/tooltips
+- Codepen: http://codepen.io/viion/full/mVzYRQ/
+- Codepen French: http://codepen.io/viion/full/VaZNbp/
+- Codepen German: http://codepen.io/viion/full/gwjQXv/
+- Codepen Japanese: http://codepen.io/viion/full/PGBxOR/
 
-## Issues:
+## Getting Started
 
-- Old XIVDB links may not convert properly.
-- Icons don't show properly for: Leves, Placenames, Shops, NPCs, Enemy, titles and some quests
+- Embed the script: http://xivdb.com/tooltips.js anywhere in your code.
+eg:
 
+```html
+<html>
+    <head>
+        ...
+    </head>
+    <body>
+        ...
+        <script src="http://xivdb.com/tooltips.js"></script>
+    </body>
+</html>
+```
 
-## Embeds
-- You can find the XIVDB tooltips code at: `http://xivdb.com/tooltips.min.js`
-- If you have any issues, please use the non minified one to debug: `http://xivdb.com/tooltips.js`
+And that is all there is to it!
+
+## Requirements
+
+The tooltips require jQuery, if you do not have this on your site then the script will attempt to embed it for you, which should work.
 
 ## Tooltip Settings
 
 ### Javascript Global Settings
 
-Here are the Javascript global settings, each one lists its "default" state. Include this somewhere
-in your code if you wish to change any of the options. You don't need to include all options, just
-the ones you want to change.
+Here are the JavaScript global settings, each one lists its "default" state. Include this somewhere in your code **if you wish to change any of the options**. You don't need to include all of the options, just the ones you want to change.
 
 ```js
 var xivdb_tooltips =
 {
-    // the XIVDB server to query (this will be https soon)
-    xivdb: 'http://xivdb.com',
+    // Where to get tooltips from.
+    source: 'http://xivdb.com',
 
-    // the language the tooltips should be
+    // Language the tooltips should be in
     language: 'en',
 
-    // tooltips require JQuery and "check" it, this can add a half a second delay
-    // if you have jquery already on your site, set this false
-    jqueryEmbed: true,
+    // Should tooltips attempt to replace the link?
+    // if set to false: seturlname, seturlcolor and seturlicon will be skipped
+    replace: true,
 
-    // tooltips use font awesome, similiar to jquery it will add it if it does not exist
-    // if you already have font awesome on your site, set this false
-    fontAwsomeEmbed: true,
-
-    // whether the name of links should be replaced, for example:
-    // http://xivdb.com/item/12122/Curtana+Nexus+Replica > "Curtana Nexus Replicate"
+    // Should tooltips replace the name of the link?
     seturlname: true,
 
-    // whether the name of links should be colored based on rarity, for example:
-    // Curtana Nexus Replicate is a Purple item and would color: `#ba68c8`
+    // Should tooltips apply a rarity color? (eg: Relics set to Purple)
     seturlcolor: true,
 
-    // if your site is dark, then set this true and rarity colors will
-    // be a bit ligher and more readable
+    // If your site is white/bright, set this true
     seturlcolorDarken: true,
 
-    // whether to include the content icon next to the link
+    // Should tooltips include an icon?
     seturlicon: true,
 
-    // the size of the content icon to use.
-    iconSize: 20,
+    // Should tooltips replace hidden links?
+    includeHiddenLinks: false,
 
-    // if the content icones should be circular
-    iconCircle: true,
+    // How long to wait until attempting to include jquery
+    // if jquery still doesn't exist after this time, it will
+    // be auto included
+    jqueryCheckDelay: 500,
 
-    // (depreciated) if the tooltip should be fixed and not follow mouse
-    tooltipFixed: false,
-    tooltipFixedBottom: false,
+    // Minimum site width (pixels) to assume we're on a mobile,
+    // tooltips should not be used on mobile sites.
+    mobileMinimumWidth: 500,
 
-    // (depreciated) if links should always open in a new tab
-    targetBlank: true,
-
-    // whether to also parse hidden links (not visible on the DOM)
-    // if you have a lot of hidden links, please consider setting this false
-    // and instead calling XIVDBTooltips.get() when you make them visible.
-    includeHiddenLinks: true,
-
-    // whether to include "xivdb.com" credit on tooltips, if you don't like it
-    // remove it :) i dont mind.
-    includeCredits: true,
-
-    // whether to include the shadow on tooltips.
-    includeFrameShadow: false,
-
-    // whether to include local links, normally you'd have this
-    // false... unless you're working on XIVDB!
-    includeLocalLinks: false,
-
-    // by default the tooltips set a 100% height on the <html> tag
-    // so that absolute positions are correct, you can disable
-    // this if you'd like
+    // Prevent this script from setting your sites html height to 100%
+    // this helps with knowing mouse position.
     preventHtmlHeight: false,
 
-    // the container tooltips should position relative to
-    container: window,
+    // How far the tooltip should be from the mouse
+    tooltipDistanceX: 30,
+    tooltipDistanceY: 30,
 
-    // if you only want links within a specific div to convert, enter it here.
-    linkContainer: 'body',
+    //
+    // EVENTS
+    //
 
-    // (depreciated) - Parent for tooltip, instead use the data attribute: data-xivdb-parent=".someclass"
-    parentTooltipAttribute: 'data-xivdb',
-    parentTooltip: true,
-
-    // (disabled) an element to "watch" and if any DOM changes occur, it will trigger
-    // an Tooltip call. This is not enabled right now.
-    watch: '.search-content',
-    watchDelay: 750,
-
-    // Tooltips can't really load on mobile, so they're disabled, if you
-    // would like to enable them, set this true to stop ignoring mobile.
-    mobileIgnore: false,
-    mobileWidth: 720,
-
-    // If you want to call some function once tooltips have loaded, you can
-    // assign a function to call here.
-    event_tooltipsLoaded: null
+    // this is called once tooltips load, provides tooltip data,
+    // eg: event_tooltipsLoaded: function(tooltips) { ... }
+    event_tooltipsLoaded: null,
 };
 ```
 
-### Data Attributes
+### Data attribute customisation
 
-XIVDB injects into the attribute: `data-xivdb-tooltip`, and will also attach an `data-xivdb-key` attribute to identify links specifically. So don't manually use this, for some reason :O they will be overwritten.
+Sometimes you may want specific links to act differently than the global setting, here are some data attributes you can use in your `a` tags.
 
-Sometimes, you want specific links to act differently than the global setting, here are some data attributes you can use in your `a` tags.
-
-**Ignore tooltips on a specific link**
+**Here is an example**
 ```html
-<a href="..." data-xivdb-ignore="1">
-```
-
-**Attach tooltip to a parent element**
-```html
-<div class="wrapper">
-    <a href="..." data-xivdb-parent=".wrapper">
+<!-- Tooltip attached to .wrapper div -->
+<div class="wrapper" data-xivdb-seturlicon="0">
+    <a href="..." data-xivdb-parent=".wrapper">...</a>
 </div>
+
+<!-- single link, tooltip doesn't change anything visually -->
+<a href="..." data-xivdb-replace="0">...</a>
 ```
 
-**Enable/Disable: injecting of the content name**
-```html
-<a href="..." data-xivdb-seturlname="0">
-```
+**Options:**
 
-**Enable/Disable: changing link color to match the content rarity**
-```html
-<a href="..." data-xivdb-seturlcolor="0">
-```
+- `data-xivdb-ignore="1"` ignore this link (no tooltips appear)
+- `data-xivdb-replace="0"` does not replace the link with any name/color/icons.
+- `data-xivdb-seturlname="0"` do not replace the link with the content name
+- `data-xivdb-seturlcolor="0"` do not change the colour of the link to match rarity
+- `data-xivdb-seturlicon="0"` do not add an game icon next to the link
 
-**Enable/Disable: adding an icon to the url**
-```html
-<a href="..." data-xivdb-seturlicon="0">
-```
+## Have any issues?
 
+If you run into any issues, it is really easy to contact me, either:
 
-
-
-
-
-
+- XIVDB Feedback: http://xivdb.com/feedback
+- Discord: https://discord.gg/6XT7FTJ

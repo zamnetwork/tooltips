@@ -1,0 +1,68 @@
+//
+// Don't underline links
+//
+*[data-xivdb-key] {
+    text-decoration: none !important;
+}
+
+//
+// clear float
+//
+.xivdb-cf {
+    *zoom: 1;
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+.xivdb-left {
+    float: left;
+    width: 250px;
+
+    .xivdb-cdl-left,
+    .xivdb-cdl-right {
+        width: 50% !important;
+    }
+}
+
+.xivdb-right {
+    float: right;
+    width: 260px;
+}
+
+//
+// Colors
+//
+.pure { color: #fff !important }
+.white { color: $white !important; }
+.light { color: darken($white, 50%) !important; }
+.red { color: $red !important; }
+.blue { color: $blue !important; }
+.green { color: $green !important; }
+.yellow { color: $yellow !important; }
+.orange { color: $orange !important; }
+.purple { color: $purple !important; }
+.gray { color: $gray !important; }
+.lime { color: $lime !important; }
+.pink { color: $pink !important; }
+.sky { color: lighten($blue, 15%) !important; }
+.magenta { color: lighten($purple, 15%) !important; }
+.highlight { color: $highlight !important; }
+
+//.rarity-common  { color: $rarity-common; }
+.rarity-scares { color: $rarity-scares; }
+.rarity-rare { color: $rarity-rare; }
+.rarity-relic { color: $rarity-relic; }
+.rarity-aetherial { color: $rarity-aetherial; }
+
+//.rarity-common-darken { color: $rarity-common; }
+.rarity-scares-darken { color: darken($rarity-scares, 30%); }
+.rarity-rare-darken { color: darken($rarity-rare, 30%); }
+.rarity-relic-darken { color: darken($rarity-relic, 30%); }
+.rarity-aetherial-darken { color: darken($rarity-aetherial, 30%); }

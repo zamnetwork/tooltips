@@ -24,7 +24,7 @@ eg:
     </head>
     <body>
         ...
-        <script src="http://xivdb.com/tooltips.js"></script>
+        <script src="https://secure.xivdb.com/tooltips.js"></script>
     </body>
 </html>
 ```
@@ -45,7 +45,7 @@ Here are the JavaScript global settings, each one lists its "default" state. Inc
 var xivdb_tooltips =
 {
     // Where to get tooltips from.
-    source: 'http://xivdb.com',
+    source: 'https://secure.xivdb.com',
 
     // Language the tooltips should be in
     language: 'en',

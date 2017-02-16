@@ -44,12 +44,6 @@ class XIVDBTooltipsClass
 	{
 		this.startTimestamp = new Date();
 
-		// if on mobile, don't do anything
-		if (this.onMobile) {
-			console.log('Tooltips not loaded as mobile size detected');
-			return;
-		}
-
 		clearTimeout(this.queue);
 		this.queue = setTimeout(() => {
 			// detect links

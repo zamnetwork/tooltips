@@ -52,7 +52,6 @@ class XIVDBTooltipsClass
 
 			if (links) {
 				this.query(links, (tooltips) => {
-					console.log('ajax complete', (new Date() - XIVDBTooltips.startTimestamp));
 					// tooltip completed event
                     if (CompletedEvent = XIVDBTooltips.getOption('event_tooltipsLoaded')) {
                         CompletedEvent(tooltips);

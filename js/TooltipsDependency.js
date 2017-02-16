@@ -19,7 +19,7 @@ class XIVDBTooltipsDependencyClass
             if (typeof jQuery === 'undefined') {
     			this.loadScript(this.jquery, () => {
                     if (!$) {
-                        var $ = jquery;
+                        var $ = jQuery;
                     }
                     return callback();
                 });

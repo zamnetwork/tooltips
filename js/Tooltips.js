@@ -83,12 +83,13 @@ class XIVDBTooltipsClass
         links.each((i, element) =>
         {
             var original = $(element).attr('data-xivdb-key'),
+				isset = $(element).attr('data-xivdb-isset'),
                 key = original.split('_'),
                 type = key[1].toString(),
                 id = parseInt(key[2]);
 
             // if key already processed, don't query it
-            if (XIVDBTooltipsHolder.exists(original)) {
+            if (XIVDBTooltipsHolder.exists(original) && isset) {
                 return;
             }
 

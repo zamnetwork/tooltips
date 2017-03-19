@@ -44,12 +44,6 @@ class XIVDBTooltipsClass
 	{
 		this.startTimestamp = new Date();
 
-		// if on mobile, don't do anything
-		if (this.onMobile) {
-			console.log('Tooltips not loaded as mobile size detected');
-			return;
-		}
-
 		clearTimeout(this.queue);
 		this.queue = setTimeout(() => {
 			// detect links
@@ -58,7 +52,6 @@ class XIVDBTooltipsClass
 
 			if (links) {
 				this.query(links, (tooltips) => {
-					console.log('ajax complete', (new Date() - XIVDBTooltips.startTimestamp));
 					// tooltip completed event
                     if (CompletedEvent = XIVDBTooltips.getOption('event_tooltipsLoaded')) {
                         CompletedEvent(tooltips);
@@ -83,12 +76,13 @@ class XIVDBTooltipsClass
         links.each((i, element) =>
         {
             var original = $(element).attr('data-xivdb-key'),
+				isset = $(element).attr('data-xivdb-isset'),
                 key = original.split('_'),
                 type = key[1].toString(),
                 id = parseInt(key[2]);
 
             // if key already processed, don't query it
-            if (XIVDBTooltipsHolder.exists(original)) {
+            if (XIVDBTooltipsHolder.exists(original) && isset) {
                 return;
             }
 

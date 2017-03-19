@@ -5,7 +5,7 @@ let xivdb_tooltips_default =
     //
 
     // Where to get tooltips from.
-    source: 'http://xivdb.com',
+    source: 'https://secure.xivdb.com',
 
     // Language the tooltips should be in
     language: 'en',
@@ -43,8 +43,8 @@ let xivdb_tooltips_default =
     preventHtmlHeight: false,
 
     // How far the tooltip should be from the mouse
-    tooltipDistanceX: 30,
-    tooltipDistanceY: 30,
+    tooltipDistanceX: 20,
+    tooltipDistanceY: 20,
 
     //
     // EVENTS
@@ -67,7 +67,6 @@ let XIVDBTooltips = new XIVDBTooltipsClass(),
     XIVDBTooltipsLinks = new XIVDBTooltipsLinksClass(),
     XIVDBTooltipsHolder = new XIVDBTooltipsHolderClass(),
     XIVDBTooltipsDependency = new XIVDBTooltipsDependencyClass();
-
 
 // start XIVDB Tooltips
 document.addEventListener("DOMContentLoaded", (event) => {

@@ -17,46 +17,47 @@ class XIVDBTooltipsDOMClass
 		// add the tooltip
         $('head').append(`<link href="${source}/tooltips.css?v=${cachetime}" rel="stylesheet" type="text/css">`);
 
-		// append tooltip placeholder
-        $('body').append('<div class="xivdb" style="display:none;"></div>');
+        if (!XIVDBTooltips.onMobile) {
+            // append tooltip placeholder
+            $('body').append('<div class="xivdb" style="display:none;"></div>');
 
-		// on mouse entering a tooltip
-        $('html').on('mouseenter', '[data-xivdb-key]', (event) =>
-        {
-            this.isActive = true;
-            let $element = $(event.currentTarget),
-                key = $element.attr('data-xivdb-key'),
-                html = XIVDBTooltipsHolder.get(key);
+            // on mouse entering a tooltip
+            $('html').on('mouseenter', '[data-xivdb-key]', (event) => {
+                this.isActive = true;
+                let $element = $(event.currentTarget),
+                    key = $element.attr('data-xivdb-key'),
+                    html = XIVDBTooltipsHolder.get(key);
 
-            // if element is being dragged, don't show any tooltips
-            if ($('.ui-draggable-dragging').length > 0) {
-                return;
+                // if element is being dragged, don't show any tooltips
+                if ($('.ui-draggable-dragging').length > 0) {
+                    return;
+                }
+
+                // set the html into the xivdb placeholder
+                $('.xivdb').html(html);
+
+                // show the tooltip
+                this.show(event);
+            })
+                .on('mouseleave', '*[data-xivdb-key]', (event) => {
+                    this.isActive = false;
+                    let $element = $(event.target);
+
+                    // hide tooltips
+                    this.hide();
+                });
+
+            // on mouse move
+            $('html').on('mousemove', (event) => {
+                if (this.isActive) {
+                    this.follow(event);
+                }
+            });
+
+            // set 100%
+            if (!XIVDBTooltips.getOption('preventHtmlHeight')) {
+                $('html').css({'height': '100%'});
             }
-
-            // set the html into the xivdb placeholder
-            $('.xivdb').html(html);
-
-            // show the tooltip
-            this.show(event);
-        })
-        .on('mouseleave', '*[data-xivdb-key]', (event) => {
-            this.isActive = false;
-            let $element = $(event.target);
-
-            // hide tooltips
-            this.hide();
-        });
-
-        // on mouse move
-        $('html').on('mousemove', (event) => {
-            if (this.isActive) {
-                this.follow(event);
-            }
-        });
-
-        // set 100%
-        if (!XIVDBTooltips.getOption('preventHtmlHeight')) {
-            $('html').css({ 'height' : '100%' });
         }
 	}
 
@@ -81,47 +82,50 @@ class XIVDBTooltipsDOMClass
                 let data = tooltip.data,
                     html = tooltip.html,
                     key = `xivdb_${type}_${data.id}`,
-                    $link = $(`[data-xivdb-key="${key}"]`);
+                    $atags = $(`[data-xivdb-key="${key}"]`);
 
                 // inject tooltip
                 XIVDBTooltipsHolder.add(key, html);
 
 				// --------------------------------------------------------------
 
-				// if attribute: data-xivdb-replace="0" is set, don't replace anything.
-				if (this.checkLinkSettings($link, ['replace']))
+				$atags.each((i, element) =>
 				{
-	                // if to replace name or not
-	                if (this.checkLinkSettings($link, ['seturlname', 'replacename'])) {
-	                    $link.text(data.name);
-	                }
+					let $link = $(element);
+					$link.attr('data-xivdb-isset', 1);
 
-	                // if to color name or not
-	                if (this.checkLinkSettings($link, ['seturlcolor', 'colorname'])) {
-	                    let css = XIVDBTooltips.getOption('seturlcolorDarken')
-	                        ? `rarity-${data.color}-darken`
-	                        : `rarity-${data.color}`;
+					// if attribute: data-xivdb-replace="0" is set, don't replace anything.
+					if (this.checkLinkSettings($link, ['replace']))
+					{
+		                // if to replace name or not
+		                if (this.checkLinkSettings($link, ['seturlname', 'replacename'])) {
+		                    $link.text(data.name);
+		                }
 
-	                    $link.addClass(css);
-	                }
+		                // if to color name or not
+		                if (this.checkLinkSettings($link, ['seturlcolor', 'colorname'])) {
+		                    let css = XIVDBTooltips.getOption('seturlcolorDarken')
+		                        ? `rarity-${data.color}-darken`
+		                        : `rarity-${data.color}`;
 
-	                // if to set icon or not
-	                if (this.checkLinkSettings($link, ['seturlicon', 'showicon'])) {
-	                    let css = 'xivdb-ii',
-	                        iconsize = parseInt($('a[data-xivdb-key]').css('font-size'), 10) + 6;
+		                    $link.addClass(css);
+		                }
 
-						console.log(data.icon);
-						if (data.icon.indexOf('finalfantasyxiv.com') == -1 && data.icon.indexOf('secure.xivdb') == -1) {
-							data.icon = 'https://secure.xivdb.com' + data.icon;
-						}
+		                // if to set icon or not
+		                if (this.checkLinkSettings($link, ['seturlicon', 'showicon'])) {
+		                    let css = 'xivdb-ii',
+		                        iconsize = parseInt($('a[data-xivdb-key]').css('font-size'), 10) + 4;
 
-	                    $link.prepend(`<img src="${data.icon}" style="height:${iconsize}px;" class="${css}">`);
-	                }
-				}
+							if (data.icon.indexOf('finalfantasyxiv.com') == -1 && data.icon.indexOf('secure.xivdb') == -1) {
+								data.icon = 'https://secure.xivdb.com' + data.icon;
+							}
+
+		                    $link.prepend(`<img src="${data.icon}" style="height:${iconsize}px;" class="${css}">`);
+		                }
+					}
+				});
 			}
 		}
-
-		console.log('finished', (new Date() - XIVDBTooltips.startTimestamp));
 	}
 
 	//

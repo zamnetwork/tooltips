@@ -9,7 +9,7 @@ class XIVDBTooltipsLinksClass
 	}
 
 	//
-	// Detect links onthe page
+	// Detect links on the page
 	//
 	detect()
 	{
@@ -63,7 +63,7 @@ class XIVDBTooltipsLinksClass
                 }
 
 				// remove url
-				href = href.replace('fr.','').replace('de.','').replace('ja.','').replace('cns.','');
+				href = href.replace('fr.','').replace('de.','').replace('ja.','').replace('cns.','').replace('www.','');
 				href = href.replace('xivdb.com', '');
 
 				// split up the link and clean it

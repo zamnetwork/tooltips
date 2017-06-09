@@ -6,7 +6,6 @@ The XIVDB tooltips script *(3.2kb JS / 1.8kb CSS)* allows you to load Final Fant
 
 ## Examples:
 
-- XIVDB: http://xivdb.com/dev/tooltips
 - Codepen: http://codepen.io/viion/full/mVzYRQ/
 - Codepen French: http://codepen.io/viion/full/VaZNbp/
 - Codepen German: http://codepen.io/viion/full/gwjQXv/

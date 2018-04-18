@@ -13,7 +13,7 @@ The XIVDB tooltips script *(3.2kb JS / 1.8kb CSS)* allows you to load Final Fant
 
 ## Getting Started
 
-- Embed the script: http://xivdb.com/tooltips.js anywhere in your code.
+- Embed the script: https://xivdb.com/tooltips.js anywhere in your code.
 eg:
 
 ```html
@@ -23,7 +23,7 @@ eg:
     </head>
     <body>
         ...
-        <script src="https://secure.xivdb.com/tooltips.js"></script>
+        <script src="https://xivdb.com/tooltips.js"></script>
     </body>
 </html>
 ```
@@ -44,7 +44,7 @@ Here are the JavaScript global settings, each one lists its "default" state. Inc
 var xivdb_tooltips =
 {
     // Where to get tooltips from.
-    source: 'https://secure.xivdb.com',
+    source: 'https://xivdb.com',
 
     // Language the tooltips should be in
     language: 'en',
